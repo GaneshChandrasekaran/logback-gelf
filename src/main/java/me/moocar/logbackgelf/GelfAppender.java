@@ -24,13 +24,13 @@ public class GelfAppender extends AppenderBase<ILoggingEvent> {
     private String facility = "GELF";
     private String graylog2ServerHost = "localhost";
     private int graylog2ServerPort = 12201;
-    private boolean useLoggerName = false;
+    private boolean useLoggerName = true;
     private boolean useMarker = false;
-    private boolean useThreadName = false;
+    private boolean useThreadName = true;
     private String graylog2ServerVersion = "0.9.6";
     private int chunkThreshold = 1000;
     private String messagePattern = "%m%rEx";
-    private String shortMessagePattern = null;
+    private String shortMessagePattern = "%-5level";
     private Map<String, String> additionalFields = new HashMap<String, String>();
     private Map<String, String> staticAdditionalFields = new HashMap<String, String>();
     private Map<String, String> fieldTypes = new HashMap<String, String>();

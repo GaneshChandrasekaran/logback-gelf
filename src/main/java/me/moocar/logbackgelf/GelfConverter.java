@@ -87,7 +87,7 @@ public class GelfConverter {
         this.patternLayout.setContext(new LoggerContext());
         this.patternLayout.setPattern(messagePattern);
         this.patternLayout.start();
-        
+
         if ( shortMessagePattern == null ) {
             this.shortPatternLayout = null;
         } else {
@@ -123,7 +123,7 @@ public class GelfConverter {
 
         map.put("facility", facility);
 
-        map.put("host", hostname);
+        map.put("wf_host", hostname);
 
         String message = patternLayout.doLayout(logEvent);
 
@@ -172,15 +172,15 @@ public class GelfConverter {
     /* allow testing */ void additionalFields(Map<String, Object> map, ILoggingEvent eventObject) {
 
         if (useLoggerName) {
-            map.put("_loggerName", eventObject.getLoggerName());
+            map.put("logger_name", eventObject.getLoggerName());
         }
 
         if(useMarker && eventHasMarker(eventObject)) {
-            map.put("_marker", eventObject.getMarker().toString());
+            map.put("marker", eventObject.getMarker().toString());
         }
 
         if (useThreadName) {
-            map.put("_threadName", eventObject.getThreadName());
+            map.put("thread_name", eventObject.getThreadName());
         }
 
         Map<String, String> mdc = eventObject.getMDCPropertyMap();
@@ -233,7 +233,7 @@ public class GelfConverter {
         if ( shortPatternLayout != null ) {
             return shortPatternLayout.doLayout(logEvent);
         }
-        
+
         if (fullMessage.length() > shortMessageLength) {
             return fullMessage.substring(0, shortMessageLength);
         }
